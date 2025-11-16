@@ -10,7 +10,7 @@ This is a **monorepo** powered by **Turborepo** containing:
 salary-advance/
 ├── apps/
 │   ├── web/          # Next.js (Employer Dashboard) - TODO
-│   ├── mobile/       # React Native (Employee App) - TODO
+│   ├── mobile/       # React Native (Employee App) ✅
 │   └── api/          # Hono Backend API ✅
 │
 ├── packages/
@@ -29,16 +29,21 @@ salary-advance/
 - **PostgreSQL** - Primary database
 - **TypeScript** - Type safety
 
-### Frontend (Coming Soon)
-- **[Next.js 14](https://nextjs.org/)** - Web dashboard (employers)
-- **[React Native](https://reactnative.dev/)** - Mobile app (employees)
-- **[Expo](https://expo.dev/)** - React Native tooling
+### Mobile App
+- **[React Native](https://reactnative.dev/)** - Employee mobile app ✅
+- **[Expo](https://expo.dev/)** - React Native tooling ✅
+- **[React Navigation](https://reactnavigation.org/)** - Navigation ✅
+- **[TanStack Query](https://tanstack.com/query)** - Data fetching ✅
+- **[Zustand](https://zustand-demo.pmnd.rs/)** - State management ✅
+
+### Web Dashboard (Coming Soon)
+- **[Next.js 14](https://nextjs.org/)** - Employer dashboard
 
 ### Infrastructure
 - **[Turborepo](https://turbo.build/)** - Monorepo build system
 - **pnpm** - Fast, disk-efficient package manager
 
-## 📦 What's Built (Phase 1)
+## 📦 What's Built
 
 ✅ **Complete Backend API** with:
 - User authentication (JWT + PIN-based)
@@ -47,6 +52,14 @@ salary-advance/
 - Advance request system
 - Payroll period tracking
 - Role-based access control
+
+✅ **Mobile App (Employee)** with:
+- Login/Authentication
+- Dashboard (earned wages, available balance)
+- Request advance flow
+- Advance history
+- Profile & settings
+- Pull-to-refresh, loading states, error handling
 
 ✅ **Database Schema** with:
 - Users, Employers, Employees
@@ -62,12 +75,13 @@ salary-advance/
 ## 🎯 How It Works
 
 ### For Employees
-1. Download mobile app (Coming Soon)
-2. Enter employer code
-3. See earned wages in real-time
-4. Request advance (up to 50% of earned wages)
-5. Receive M-Pesa instantly
-6. Deducted from next paycheck
+1. Download mobile app ✅
+2. Login with phone number + PIN ✅
+3. See earned wages in real-time ✅
+4. Request advance (up to 50% of earned wages) ✅
+5. View advance history ✅
+6. Receive M-Pesa (integration coming soon)
+7. Deducted from next paycheck (via employer payroll)
 
 ### For Employers
 1. Sign up on web dashboard (Coming Soon)
@@ -126,6 +140,21 @@ pnpm dev
 
 # API will be available at http://localhost:3001
 ```
+
+### Running the Mobile App
+
+```bash
+# Start Expo development server
+cd apps/mobile
+pnpm start
+
+# Then:
+# - Press 'i' for iOS simulator
+# - Press 'a' for Android emulator
+# - Scan QR code with Expo Go app on your phone
+```
+
+See [apps/mobile/README.md](apps/mobile/README.md) for detailed mobile setup.
 
 ## 📖 API Documentation
 
@@ -308,27 +337,31 @@ totalCharged = amount + fee
 - Default: **4% fee** (configurable by employer)
 - **Auto-approval** by default (configurable)
 
-## 🚧 What's Next (Phase 2 & 3)
+## 🚧 What's Next
 
-### Phase 2: Frontend Apps
+### Phase 2: Web Dashboard (In Progress)
 - [ ] Next.js employer dashboard
-- [ ] React Native employee mobile app
-- [ ] Expo setup and configuration
+- [ ] Employee management UI
+- [ ] Payroll upload interface
+- [ ] Advances overview
+- [ ] Analytics & reporting
 - [ ] UI component library
 
-### Phase 3: Integrations
+### Phase 3: Integrations (Next)
 - [ ] M-Pesa Daraja API (disbursements)
 - [ ] SMS notifications (Africa's Talking)
 - [ ] Email notifications
+- [ ] Push notifications (mobile)
 - [ ] Payroll system integrations
 
-### Phase 4: Advanced Features
+### Phase 4: Advanced Features (Future)
+- [ ] Biometric auth (mobile)
 - [ ] Cash flow forecasting (AI)
 - [ ] Automated payroll reconciliation
 - [ ] Multi-currency support
-- [ ] Analytics dashboard
 - [ ] Admin panel
 - [ ] CSV import/export
+- [ ] Invoice factoring (second product!)
 
 ## 📝 Development Scripts
 
