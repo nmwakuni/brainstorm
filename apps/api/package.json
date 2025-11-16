@@ -1,0 +1,29 @@
+{
+  "name": "@salary-advance/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.5.0",
+    "@hono/zod-validator": "^0.2.1",
+    "@salary-advance/database": "workspace:*",
+    "@salary-advance/lib": "workspace:*",
+    "@salary-advance/types": "workspace:*",
+    "dotenv": "^16.3.1",
+    "drizzle-orm": "^0.29.1",
+    "hono": "^3.11.7",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@salary-advance/config": "workspace:*",
+    "@types/node": "^20.10.5",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.2"
+  }
+}
