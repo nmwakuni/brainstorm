@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   View,
   Text,
@@ -9,14 +9,38 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native'
+import * as SecureStore from 'expo-secure-store'
 import { authApi } from '../services/api'
 import { useAuthStore } from '../store/authStore'
+import { checkBiometricCapabilities, authenticateWithBiometrics, getBiometricTypeName } from '../utils/biometrics'
 
 export default function LoginScreen() {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [pin, setPin] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [biometricsAvailable, setBiometricsAvailable] = useState(false)
+  const [biometricType, setBiometricType] = useState('')
   const login = useAuthStore(state => state.login)
+
+  useEffect(() => {
+    checkBiometrics()
+    loadSavedCredentials()
+  }, [])
+
+  const checkBiometrics = async () => {
+    const capabilities = await checkBiometricCapabilities()
+    setBiometricsAvailable(capabilities.isAvailable)
+    if (capabilities.isAvailable) {
+      setBiometricType(getBiometricTypeName(capabilities))
+    }
+  }
+
+  const loadSavedCredentials = async () => {
+    const savedPhone = await SecureStore.getItemAsync('lastPhoneNumber')
+    if (savedPhone) {
+      setPhoneNumber(savedPhone)
+    }
+  }
 
   const handleLogin = async () => {
     if (!phoneNumber || !pin) {
@@ -34,6 +58,10 @@ export default function LoginScreen() {
       const response = await authApi.login(phoneNumber, pin)
 
       if (response.success && response.token) {
+        // Save phone number for biometric login
+        await SecureStore.setItemAsync('lastPhoneNumber', phoneNumber)
+        await SecureStore.setItemAsync('savedPin', pin)
+
         await login(response.token, response.user)
       } else {
         Alert.alert('Error', response.error || 'Login failed')
@@ -44,6 +72,44 @@ export default function LoginScreen() {
         'Login Failed',
         error.response?.data?.error || 'An error occurred. Please try again.'
       )
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleBiometricLogin = async () => {
+    const savedPin = await SecureStore.getItemAsync('savedPin')
+    const savedPhone = await SecureStore.getItemAsync('lastPhoneNumber')
+
+    if (!savedPin || !savedPhone) {
+      Alert.alert(
+        'Setup Required',
+        'Please log in with your PIN first to enable biometric authentication.'
+      )
+      return
+    }
+
+    setIsLoading(true)
+    try {
+      const result = await authenticateWithBiometrics('Log in to Salary Advance')
+
+      if (result.success) {
+        // Use saved credentials to log in
+        const response = await authApi.login(savedPhone, savedPin)
+
+        if (response.success && response.token) {
+          await login(response.token, response.user)
+        } else {
+          Alert.alert('Error', 'Login failed. Please try again with your PIN.')
+        }
+      } else {
+        if (result.error) {
+          Alert.alert('Authentication Failed', result.error)
+        }
+      }
+    } catch (error) {
+      console.error('Biometric login error:', error)
+      Alert.alert('Error', 'Biometric authentication failed. Please use your PIN.')
     } finally {
       setIsLoading(false)
     }
@@ -91,6 +157,26 @@ export default function LoginScreen() {
               {isLoading ? 'Logging in...' : 'Login'}
             </Text>
           </TouchableOpacity>
+
+          {biometricsAvailable && (
+            <>
+              <View style={styles.dividerContainer}>
+                <View style={styles.dividerLine} />
+                <Text style={styles.dividerText}>OR</Text>
+                <View style={styles.dividerLine} />
+              </View>
+
+              <TouchableOpacity
+                style={[styles.biometricButton, isLoading && styles.buttonDisabled]}
+                onPress={handleBiometricLogin}
+                disabled={isLoading}
+              >
+                <Text style={styles.biometricButtonText}>
+                  {biometricType === 'Face ID' ? '👤' : '👆'} Use {biometricType}
+                </Text>
+              </TouchableOpacity>
+            </>
+          )}
 
           <TouchableOpacity style={styles.linkButton}>
             <Text style={styles.linkText}>Forgot PIN?</Text>
@@ -158,6 +244,35 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  dividerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 24,
+  },
+  dividerLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: '#d1d5db',
+  },
+  dividerText: {
+    marginHorizontal: 16,
+    color: '#9ca3af',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  biometricButton: {
+    backgroundColor: '#fff',
+    borderWidth: 2,
+    borderColor: '#10b981',
+    padding: 16,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  biometricButtonText: {
+    color: '#10b981',
     fontSize: 16,
     fontWeight: '600',
   },

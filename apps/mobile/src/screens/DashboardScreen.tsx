@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import {
   View,
   Text,
@@ -13,14 +12,11 @@ import { useNavigation } from '@react-navigation/native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import type { RootStackParamList } from '../navigation'
 import { employeeApi } from '../services/api'
-import { useAuthStore } from '../store/authStore'
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>
 
 export default function DashboardScreen() {
   const navigation = useNavigation<NavigationProp>()
-  const user = useAuthStore(state => state.user)
-  const logout = useAuthStore(state => state.logout)
 
   const {
     data,
@@ -46,6 +42,11 @@ export default function DashboardScreen() {
       month: 'short',
       day: 'numeric',
     })
+  }
+
+  const getStatusStyle = (status: string): object => {
+    const statusKey = `status${status}` as keyof typeof styles
+    return styles[statusKey] || {}
   }
 
   if (isLoading) {
@@ -182,7 +183,7 @@ export default function DashboardScreen() {
                 </Text>
               </View>
               <View style={styles.advanceRight}>
-                <View style={[styles.statusBadge, styles[`status${advance.status}`]]}>
+                <View style={[styles.statusBadge, getStatusStyle(advance.status)]}>
                   <Text style={styles.statusText}>
                     {advance.status === 'disbursed' ? '✓ Sent' : advance.status}
                   </Text>

@@ -5,10 +5,12 @@ React Native mobile app for employees to access their earned wages instantly.
 ## 🎯 Features
 
 - **Login with Phone + PIN** - Secure authentication
+- **Biometric Authentication** - Face ID/Fingerprint support for quick login
 - **Dashboard** - View earned wages, available balance, recent advances
 - **Request Advance** - Request up to 50% of earned wages
 - **Advance History** - Track all past advances and their status
 - **Profile** - View account details and settings
+- **Push Notifications** - Real-time alerts for approvals and disbursements
 
 ## 🛠️ Tech Stack
 
@@ -109,6 +111,26 @@ Dashboard (Main Screen)
   └─→ Profile → Logout → Login
 ```
 
+## 🔔 Push Notifications
+
+The app includes a complete push notification system:
+
+- **Approval Notifications** - Instant alert when advance is approved
+- **Disbursement Notifications** - Alert when money is sent to M-Pesa
+- **Payment Reminders** - Reminders before payday deductions
+- **Foreground & Background** - Works even when app is in background
+
+Notifications are configured in `src/utils/notifications.ts` and initialized in `App.tsx`.
+
+## 🔐 Biometric Authentication
+
+Face ID (iOS) and Fingerprint (Android) authentication:
+
+- Auto-detects available biometric hardware
+- Securely stores credentials using Expo Secure Store
+- Falls back to PIN entry if biometrics fail
+- Configured in `src/utils/biometrics.ts`
+
 ## 🧪 Testing
 
 To test the app:
@@ -117,6 +139,8 @@ To test the app:
 2. Create a test employee account via the API or web dashboard
 3. Login with employee phone number and PIN (default: 0000)
 4. Test advance request flow
+5. Test biometric login (requires physical device)
+6. Test notifications (grant permissions when prompted)
 
 ## 🐛 Common Issues
 
