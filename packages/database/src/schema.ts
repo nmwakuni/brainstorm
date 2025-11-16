@@ -152,6 +152,7 @@ export const advances = pgTable('advances', {
   failedAt: timestamp('failed_at'),
   failureReason: text('failure_reason'),
   mpesaTransactionId: text('mpesa_transaction_id'),
+  mpesaConversationId: text('mpesa_conversation_id'),
   repaidAt: timestamp('repaid_at'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),

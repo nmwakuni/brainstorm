@@ -5,6 +5,7 @@ import { db, employees, advances, employers } from '@salary-advance/database'
 import { requireAuth, AuthContext } from '../middleware/auth'
 import { calculateAdvanceFee, canRequestAdvance } from '@salary-advance/lib'
 import { eq, and, gte } from 'drizzle-orm'
+import { getMpesaService } from '../services/mpesa'
 
 const advancesRoute = new Hono<AuthContext>()
 
@@ -114,7 +115,42 @@ advancesRoute.post('/request', zValidator('json', requestAdvanceSchema), async c
     })
     .returning()
 
-  // TODO: If auto-approved, trigger M-Pesa disbursement
+  // If auto-approved, trigger M-Pesa disbursement
+  if (employer.settings!.autoApproveAdvances && process.env.MPESA_ENABLED === 'true') {
+    try {
+      const mpesa = getMpesaService()
+      const result = await mpesa.sendMoney({
+        amount: amount,
+        phoneNumber: employee.mpesaNumber,
+        remarks: `Salary advance for ${employee.firstName} ${employee.lastName}`,
+        occasionReference: newAdvance.id,
+      })
+
+      // Store M-Pesa conversation ID for webhook matching
+      await db
+        .update(advances)
+        .set({
+          mpesaConversationId: result.OriginatorConversationID,
+        })
+        .where(eq(advances.id, newAdvance.id))
+
+      console.log(`✓ M-Pesa disbursement initiated for advance ${newAdvance.id}`)
+    } catch (error: any) {
+      // Mark as failed if M-Pesa request fails
+      await db
+        .update(advances)
+        .set({
+          status: 'failed',
+          failureReason: error.message || 'M-Pesa disbursement failed',
+          failedAt: new Date(),
+        })
+        .where(eq(advances.id, newAdvance.id))
+
+      return c.json({
+        error: 'Failed to process M-Pesa payment. Please try again later.',
+      }, 500)
+    }
+  }
 
   return c.json({
     success: true,

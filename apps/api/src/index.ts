@@ -9,6 +9,7 @@ import employerRoutes from './routes/employers'
 import employeeRoutes from './routes/employees'
 import advanceRoutes from './routes/advances'
 import payrollRoutes from './routes/payroll'
+import mpesaRoutes from './routes/mpesa'
 
 const app = new Hono()
 
@@ -37,6 +38,7 @@ app.route('/employers', employerRoutes)
 app.route('/employees', employeeRoutes)
 app.route('/advances', advanceRoutes)
 app.route('/payroll', payrollRoutes)
+app.route('/mpesa', mpesaRoutes)
 
 // 404 handler
 app.notFound(c => {
