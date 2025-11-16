@@ -1,0 +1,69 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+**/node_modules/
+**/.pnpm-store/
+
+# Build outputs
+dist/
+build/
+.next/
+.turbo/
+out/
+**/.next/
+**/dist/
+**/build/
+
+# Mobile
+.expo/
+android/
+ios/
+
+# Git
+.git/
+.gitignore
+.github/
+
+# Environment files
+.env.local
+.env.*.local
+**/.env.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing
+coverage/
+.nyc_output/
+
+# Documentation (not needed in container)
+*.md
+!README.md
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Misc
+.prettierrc
+.eslintrc*
+eslint.config.js
+jest.config.js
+tsconfig.json
