@@ -61,3 +61,9 @@ web-build/
 
 # Metro
 .metro-health-check*
+
+# Docker
+backups/
+logs/
+nginx/ssl/*.pem
+nginx/ssl/*.key
