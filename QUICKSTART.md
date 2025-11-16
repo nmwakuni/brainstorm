@@ -83,6 +83,7 @@ curl -X POST http://localhost:3001/auth/register/employer \
 ```
 
 You'll get back a token like:
+
 ```json
 {
   "success": true,
@@ -129,6 +130,7 @@ curl http://localhost:3001/employees/dashboard \
 ```
 
 You'll see:
+
 - Earned wages to date
 - Available to withdraw
 - Recent advances
@@ -157,15 +159,18 @@ curl -X POST http://localhost:3001/advances/request \
 ## Troubleshooting
 
 ### "Connection refused" error
+
 - Make sure PostgreSQL is running
 - Check your DATABASE_URL is correct
 
 ### "pnpm: command not found"
+
 ```bash
 npm install -g pnpm
 ```
 
 ### Database migration errors
+
 ```bash
 # Reset database and try again
 dropdb salary_advance
@@ -174,6 +179,7 @@ pnpm db:migrate
 ```
 
 ### Port 3001 already in use
+
 ```bash
 # Change PORT in apps/api/.env
 PORT=3002
@@ -182,12 +188,14 @@ PORT=3002
 ## Development Tools
 
 ### Drizzle Studio (Database GUI)
+
 ```bash
 pnpm db:studio
 # Opens at https://local.drizzle.studio
 ```
 
 ### View Logs
+
 ```bash
 cd apps/api
 pnpm dev

@@ -24,7 +24,7 @@ export default function App() {
     setupNotificationChannel()
 
     // Request permissions
-    requestNotificationPermissions().then((result) => {
+    requestNotificationPermissions().then(result => {
       if (result.granted) {
         console.log('Notification permissions granted')
       } else {
@@ -33,25 +33,21 @@ export default function App() {
     })
 
     // Listener for notifications received while app is in foreground
-    notificationListener.current = Notifications.addNotificationReceivedListener(
-      (notification) => {
-        console.log('Notification received:', notification)
-      }
-    )
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      console.log('Notification received:', notification)
+    })
 
     // Listener for when user interacts with notification
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(
-      (response) => {
-        console.log('Notification response:', response)
-        const data = response.notification.request.content.data
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log('Notification response:', response)
+      const data = response.notification.request.content.data
 
-        // Handle different notification types
-        if (data?.type === 'advance_approved' || data?.type === 'advance_disbursed') {
-          // TODO: Navigate to advance history or specific advance detail
-          console.log('Advance notification:', data)
-        }
+      // Handle different notification types
+      if (data?.type === 'advance_approved' || data?.type === 'advance_disbursed') {
+        // TODO: Navigate to advance history or specific advance detail
+        console.log('Advance notification:', data)
       }
-    )
+    })
 
     // Cleanup
     return () => {

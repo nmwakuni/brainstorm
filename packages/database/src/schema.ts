@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, decimal, boolean, integer, json } from 'drizzle-orm/pg-core'
+import { pgTable, text, timestamp, decimal, boolean, json } from 'drizzle-orm/pg-core'
 import { createId } from '@paralleldrive/cuid2'
 
 // ============================================================================
@@ -34,19 +34,21 @@ export const employers = pgTable('employers', {
   taxPin: text('tax_pin'),
   businessRegistration: text('business_registration'),
   isActive: boolean('is_active').default(true).notNull(),
-  settings: json('settings').$type<{
-    autoApproveAdvances: boolean
-    maxAdvancePercentage: number
-    maxAdvancesPerMonth: number
-    feePercentage: number
-    flatFee: number
-  }>().default({
-    autoApproveAdvances: true,
-    maxAdvancePercentage: 50,
-    maxAdvancesPerMonth: 4,
-    feePercentage: 4,
-    flatFee: 0,
-  }),
+  settings: json('settings')
+    .$type<{
+      autoApproveAdvances: boolean
+      maxAdvancePercentage: number
+      maxAdvancesPerMonth: number
+      feePercentage: number
+      flatFee: number
+    }>()
+    .default({
+      autoApproveAdvances: true,
+      maxAdvancePercentage: 50,
+      maxAdvancesPerMonth: 4,
+      feePercentage: 4,
+      flatFee: 0,
+    }),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 })

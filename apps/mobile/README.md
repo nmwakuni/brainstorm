@@ -96,6 +96,7 @@ Edit `app.json` to configure:
 ```
 
 For local development:
+
 - **iOS Simulator**: `http://localhost:3001`
 - **Android Emulator**: `http://10.0.2.2:3001`
 - **Physical Device**: `http://YOUR_COMPUTER_IP:3001`

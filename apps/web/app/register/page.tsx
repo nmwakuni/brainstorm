@@ -8,7 +8,7 @@ import { useAuthStore } from '@/lib/auth-store'
 
 export default function RegisterPage() {
   const router = useRouter()
-  const login = useAuthStore((state) => state.login)
+  const login = useAuthStore(state => state.login)
   const [formData, setFormData] = useState({
     companyName: '',
     email: '',
@@ -65,9 +65,7 @@ export default function RegisterPage() {
       <div className="max-w-md w-full mx-4">
         <div className="card">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-primary-600 mb-2">
-              💰 Salary Advance
-            </h1>
+            <h1 className="text-3xl font-bold text-primary-600 mb-2">💰 Salary Advance</h1>
             <p className="text-gray-600">Create Employer Account</p>
           </div>
 
@@ -163,11 +161,7 @@ export default function RegisterPage() {
               </div>
             )}
 
-            <button
-              type="submit"
-              className="btn btn-primary w-full"
-              disabled={isLoading}
-            >
+            <button type="submit" className="btn btn-primary w-full" disabled={isLoading}>
               {isLoading ? 'Creating account...' : 'Create Account'}
             </button>
           </form>
@@ -182,9 +176,7 @@ export default function RegisterPage() {
           </div>
         </div>
 
-        <p className="text-center text-sm text-gray-600 mt-6">
-          Built with ❤️ in Kenya 🇰🇪
-        </p>
+        <p className="text-center text-sm text-gray-600 mt-6">Built with ❤️ in Kenya 🇰🇪</p>
       </div>
     </div>
   )

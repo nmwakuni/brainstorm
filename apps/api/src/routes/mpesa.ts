@@ -1,12 +1,11 @@
 import { Hono } from 'hono'
-import { db } from '../../db'
-import { advances } from '../../db/schema'
+import { db, advances } from '@salary-advance/database'
 import { eq } from 'drizzle-orm'
 
 const mpesa = new Hono()
 
 // B2C Result callback
-mpesa.post('/result', async (c) => {
+mpesa.post('/result', async c => {
   try {
     const body = await c.req.json()
     console.log('M-Pesa B2C Result:', JSON.stringify(body, null, 2))
@@ -16,7 +15,6 @@ mpesa.post('/result', async (c) => {
 
     // Extract transaction details from callback parameters
     const resultParameters = result?.ResultParameters?.ResultParameter || []
-    const conversationId = result?.ConversationID
     const originatorConversationId = result?.OriginatorConversationID
 
     // Find the advance by originatorConversationId (stored during disbursement)
@@ -33,17 +31,7 @@ mpesa.post('/result', async (c) => {
 
     if (resultCode === 0) {
       // Success
-      const transactionId = resultParameters.find(
-        (p: any) => p.Key === 'TransactionID'
-      )?.Value
-
-      const transactionAmount = resultParameters.find(
-        (p: any) => p.Key === 'TransactionAmount'
-      )?.Value
-
-      const receiverPartyPublicName = resultParameters.find(
-        (p: any) => p.Key === 'ReceiverPartyPublicName'
-      )?.Value
+      const transactionId = resultParameters.find((p: any) => p.Key === 'TransactionID')?.Value
 
       // Update advance to disbursed
       await db
@@ -79,7 +67,7 @@ mpesa.post('/result', async (c) => {
 })
 
 // B2C Timeout callback
-mpesa.post('/timeout', async (c) => {
+mpesa.post('/timeout', async c => {
   try {
     const body = await c.req.json()
     console.log('M-Pesa B2C Timeout:', JSON.stringify(body, null, 2))
@@ -114,7 +102,7 @@ mpesa.post('/timeout', async (c) => {
 })
 
 // Query result callback
-mpesa.post('/query-result', async (c) => {
+mpesa.post('/query-result', async c => {
   try {
     const body = await c.req.json()
     console.log('M-Pesa Query Result:', JSON.stringify(body, null, 2))
@@ -126,7 +114,7 @@ mpesa.post('/query-result', async (c) => {
 })
 
 // Query timeout callback
-mpesa.post('/query-timeout', async (c) => {
+mpesa.post('/query-timeout', async c => {
   try {
     const body = await c.req.json()
     console.log('M-Pesa Query Timeout:', JSON.stringify(body, null, 2))
@@ -138,7 +126,7 @@ mpesa.post('/query-timeout', async (c) => {
 })
 
 // Health check endpoint
-mpesa.get('/health', (c) => {
+mpesa.get('/health', c => {
   return c.json({ status: 'ok', message: 'M-Pesa webhook endpoints active' })
 })
 

@@ -12,20 +12,20 @@ const api = axios.create({
 
 // Request interceptor to add auth token
 api.interceptors.request.use(
-  (config) => {
+  config => {
     const token = useAuthStore.getState().token
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
     return config
   },
-  (error) => Promise.reject(error)
+  error => Promise.reject(error)
 )
 
 // Response interceptor to handle errors
 api.interceptors.response.use(
-  (response) => response,
-  async (error) => {
+  response => response,
+  async error => {
     if (error.response?.status === 401) {
       useAuthStore.getState().logout()
       if (typeof window !== 'undefined') {
@@ -96,11 +96,7 @@ export const employerApi = {
     return response.data
   },
 
-  updateAdvanceStatus: async (
-    id: string,
-    status: string,
-    reason?: string
-  ) => {
+  updateAdvanceStatus: async (id: string, status: string, reason?: string) => {
     const response = await api.patch(`/employers/advances/${id}`, {
       status,
       reason,

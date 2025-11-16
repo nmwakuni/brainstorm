@@ -18,6 +18,7 @@ Complete guide for deploying the Salary Advance platform to production.
 ## Prerequisites
 
 ### Required Services
+
 - **PostgreSQL Database** (Neon, Supabase, or self-hosted)
 - **Node.js Hosting** (Railway, Fly.io, Render, or VPS)
 - **Static Hosting** (Vercel, Netlify for Next.js)
@@ -25,6 +26,7 @@ Complete guide for deploying the Salary Advance platform to production.
 - **Domain Name** with SSL (for webhooks)
 
 ### Tools Needed
+
 - Git
 - pnpm (v8+)
 - Node.js (v18+)
@@ -56,6 +58,7 @@ pnpm db:seed  # Optional: seed with test data
 ```
 
 ### Connection String Format
+
 ```
 postgresql://user:password@host:5432/database?sslmode=require
 ```
@@ -148,6 +151,7 @@ sudo apt install nginx
 ```
 
 ### Nginx Configuration
+
 ```nginx
 server {
     listen 80;
@@ -390,6 +394,7 @@ Sentry.init({ dsn: process.env.SENTRY_DSN })
 ### Performance Metrics
 
 Track these KPIs:
+
 - API response time (target: < 200ms)
 - Database query time (target: < 50ms)
 - M-Pesa success rate (target: > 95%)
@@ -427,17 +432,20 @@ eas update --branch production
 ### M-Pesa Issues
 
 **Problem**: Authentication fails
+
 - Verify Consumer Key and Secret
 - Check environment (sandbox vs production)
 - Ensure credentials haven't expired
 
 **Problem**: Disbursement fails
+
 - Verify phone number format (254XXXXXXXXX)
 - Check shortcode balance
 - Verify security credential is correct
 - Check callback URL is accessible
 
 **Problem**: Webhook not receiving callbacks
+
 - Verify URL is HTTPS and publicly accessible
 - Check firewall/security groups
 - Ensure server responds within 30 seconds
@@ -446,6 +454,7 @@ eas update --branch production
 ### Database Issues
 
 **Problem**: Connection timeouts
+
 - Increase connection pool size
 - Check network connectivity
 - Verify SSL settings
@@ -454,6 +463,7 @@ eas update --branch production
 ### API Issues
 
 **Problem**: High memory usage
+
 - Check for memory leaks
 - Implement pagination
 - Optimize database queries
@@ -464,6 +474,7 @@ eas update --branch production
 ## Support
 
 For production issues:
+
 - **Email**: support@yourdomain.com
 - **Slack**: #prod-alerts
 - **On-call**: PagerDuty rotation

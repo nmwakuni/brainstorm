@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  Alert,
-} from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native'
 import { useAuthStore } from '../store/authStore'
 import { useQuery } from '@tanstack/react-query'
 import { employeeApi } from '../services/api'
@@ -47,7 +40,8 @@ export default function ProfileScreen() {
       <View style={styles.header}>
         <View style={styles.avatar}>
           <Text style={styles.avatarText}>
-            {employee?.firstName?.[0]}{employee?.lastName?.[0]}
+            {employee?.firstName?.[0]}
+            {employee?.lastName?.[0]}
           </Text>
         </View>
         <Text style={styles.name}>
@@ -71,9 +65,7 @@ export default function ProfileScreen() {
           <View style={styles.row}>
             <Text style={styles.label}>Monthly Salary</Text>
             <Text style={styles.value}>
-              {employee?.monthlySalary
-                ? formatCurrency(employee.monthlySalary)
-                : '—'}
+              {employee?.monthlySalary ? formatCurrency(employee.monthlySalary) : '—'}
             </Text>
           </View>
 

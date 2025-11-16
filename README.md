@@ -23,12 +23,14 @@ salary-advance/
 ## 🚀 Tech Stack
 
 ### Backend
+
 - **[Hono](https://hono.dev/)** - Fast, lightweight web framework
 - **[Drizzle ORM](https://orm.drizzle.team/)** - Type-safe SQL toolkit
 - **PostgreSQL** - Primary database
 - **TypeScript** - Type safety
 
 ### Mobile App
+
 - **[React Native](https://reactnative.dev/)** - Employee mobile app ✅
 - **[Expo](https://expo.dev/)** - React Native tooling ✅
 - **[React Navigation](https://reactnavigation.org/)** - Navigation ✅
@@ -38,22 +40,26 @@ salary-advance/
 - **Expo Notifications** - Push notifications ✅
 
 ### Web Dashboard
+
 - **[Next.js 14](https://nextjs.org/)** - Employer dashboard ✅
 - **[Tailwind CSS](https://tailwindcss.com/)** - Styling ✅
 - **[TanStack Query](https://tanstack.com/query)** - Data fetching ✅
 - **[Zustand](https://zustand-demo.pmnd.rs/)** - State management ✅
 
 ### Payments
+
 - **M-Pesa Daraja API** - Real-time B2C disbursements ✅
 - **Webhook Integration** - Transaction status callbacks ✅
 
 ### Infrastructure
+
 - **[Turborepo](https://turbo.build/)** - Monorepo build system
 - **pnpm** - Fast, disk-efficient package manager
 
 ## 📦 What's Built
 
 ✅ **Complete Backend API** with:
+
 - User authentication (JWT + PIN-based)
 - Employer registration & management
 - Employee onboarding
@@ -65,6 +71,7 @@ salary-advance/
 - Comprehensive error handling
 
 ✅ **Mobile App (Employee)** with:
+
 - Login/Authentication with PIN
 - Biometric authentication (Face ID/Fingerprint)
 - Dashboard (earned wages, available balance)
@@ -76,6 +83,7 @@ salary-advance/
 - Offline-friendly architecture
 
 ✅ **Web Dashboard (Employer)** with:
+
 - Login & registration
 - Dashboard overview with real-time stats
 - Employee management (add, view, manage)
@@ -85,6 +93,7 @@ salary-advance/
 - Responsive design for all screens
 
 ✅ **M-Pesa Integration** with:
+
 - B2C payment disbursement
 - Real-time transaction processing
 - Webhook callbacks for status updates
@@ -93,6 +102,7 @@ salary-advance/
 - Sandbox & production environments
 
 ✅ **Database Schema** with:
+
 - Users, Employers, Employees
 - Payroll Periods & Entries
 - Advances & Transactions
@@ -100,6 +110,7 @@ salary-advance/
 - Full type safety with Drizzle ORM
 
 ✅ **Shared Packages**:
+
 - Type-safe API contracts
 - Utility functions (auth, calculations, formatting)
 - Reusable business logic
@@ -107,6 +118,7 @@ salary-advance/
 ## 🎯 How It Works
 
 ### For Employees
+
 1. Download mobile app ✅
 2. Login with phone number + PIN or biometric ✅
 3. See earned wages in real-time ✅
@@ -117,6 +129,7 @@ salary-advance/
 8. Deducted automatically from next paycheck ✅
 
 ### For Employers
+
 1. Sign up on web dashboard ✅
 2. Add employees with salary info ✅
 3. Platform calculates earned wages automatically ✅
@@ -195,6 +208,7 @@ See [apps/mobile/README.md](apps/mobile/README.md) for detailed mobile setup.
 ### Authentication
 
 #### Register Employer
+
 ```http
 POST /auth/register/employer
 Content-Type: application/json
@@ -210,6 +224,7 @@ Content-Type: application/json
 ```
 
 #### Register Employee
+
 ```http
 POST /auth/register/employee
 Content-Type: application/json
@@ -222,6 +237,7 @@ Content-Type: application/json
 ```
 
 #### Login
+
 ```http
 POST /auth/login
 Content-Type: application/json
@@ -235,16 +251,19 @@ Content-Type: application/json
 ### Employer Endpoints
 
 All employer endpoints require authentication:
+
 ```http
 Authorization: Bearer <token>
 ```
 
 #### Get Dashboard Stats
+
 ```http
 GET /employers/dashboard
 ```
 
 #### Create Employee
+
 ```http
 POST /employers/employees
 Content-Type: application/json
@@ -261,6 +280,7 @@ Content-Type: application/json
 ```
 
 #### Get All Employees
+
 ```http
 GET /employers/employees
 ```
@@ -268,22 +288,26 @@ GET /employers/employees
 ### Employee Endpoints
 
 All employee endpoints require authentication:
+
 ```http
 Authorization: Bearer <token>
 ```
 
 #### Get Dashboard
+
 ```http
 GET /employees/dashboard
 ```
 
 Returns:
+
 - Earned wages to date
 - Available to withdraw
 - Recent advances
 - Account info
 
 #### Get Advance History
+
 ```http
 GET /employees/advances
 ```
@@ -291,6 +315,7 @@ GET /employees/advances
 ### Advance Endpoints
 
 #### Request Advance
+
 ```http
 POST /advances/request
 Authorization: Bearer <employee-token>
@@ -302,6 +327,7 @@ Content-Type: application/json
 ```
 
 #### Get Advance Details
+
 ```http
 GET /advances/:id
 Authorization: Bearer <token>
@@ -312,32 +338,39 @@ Authorization: Bearer <token>
 ### Key Tables
 
 **users**
+
 - Authentication and role management
 - Supports: admin, employer, employee
 
 **employers**
+
 - Company information
 - Settings (fees, limits, auto-approval)
 
 **employees**
+
 - Employee profiles
 - Salary information
 - M-Pesa details
 
 **advances**
+
 - Advance requests and status
 - Amount, fee, total
 - Status tracking (pending → approved → disbursed → repaid)
 
 **payroll_periods**
+
 - Monthly pay cycles
 - Start, end, pay dates
 
 **payroll_entries**
+
 - Individual employee payroll records
 - Days worked, earnings, deductions
 
 **transactions**
+
 - Financial transaction log
 - Disbursements, repayments, fees
 
@@ -374,18 +407,21 @@ totalCharged = amount + fee
 ## 🎉 Complete Features
 
 ✅ **Phase 1: Backend & Database** - DONE!
+
 - Complete API with authentication
 - Full database schema
 - Business logic implementation
 - Type-safe architecture
 
 ✅ **Phase 2: Mobile App** - DONE!
+
 - React Native app for employees
 - Biometric authentication
 - Push notifications
 - Full advance flow
 
 ✅ **Phase 3: Web Dashboard** - DONE!
+
 - Next.js employer portal
 - Employee management
 - Advance approval workflow
@@ -393,6 +429,7 @@ totalCharged = amount + fee
 - Analytics & reports
 
 ✅ **Phase 4: M-Pesa Integration** - DONE!
+
 - B2C payment disbursement
 - Webhook integration
 - Real-time transaction tracking
@@ -401,6 +438,7 @@ totalCharged = amount + fee
 ## 🚀 Ready for Production!
 
 This platform is **production-ready** and includes:
+
 - Complete end-to-end salary advance flow
 - Real M-Pesa payment integration
 - Mobile & web apps
@@ -414,6 +452,7 @@ See [PRODUCTION_CHECKLIST.md](PRODUCTION_CHECKLIST.md) for go-live checklist.
 ## 🔮 Future Enhancements
 
 ### Phase 5: Additional Features (Future)
+
 - [ ] SMS notifications (Africa's Talking)
 - [ ] Email notifications (SendGrid)
 - [ ] Admin super-dashboard
@@ -425,6 +464,7 @@ See [PRODUCTION_CHECKLIST.md](PRODUCTION_CHECKLIST.md) for go-live checklist.
 - [ ] White-label solution
 
 ### Phase 6: Second Product (Future)
+
 - [ ] Invoice Factoring platform
 - [ ] SME lending marketplace
 - [ ] Group savings (chamas) digitization

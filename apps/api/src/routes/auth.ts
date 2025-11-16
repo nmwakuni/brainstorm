@@ -18,7 +18,7 @@ const registerEmployeeSchema = z.object({
 })
 
 auth.post('/register/employee', zValidator('json', registerEmployeeSchema), async c => {
-  const { phoneNumber, pin, employerCode } = c.req.valid('json')
+  const { phoneNumber, pin, employerCode: _employerCode } = c.req.valid('json')
 
   // TODO: Verify employer code exists and map to employer
   // For now, we'll skip this and handle it in employer onboarding

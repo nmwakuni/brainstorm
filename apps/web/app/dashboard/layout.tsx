@@ -6,11 +6,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useAuthStore } from '@/lib/auth-store'
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const pathname = usePathname()
   const { isAuthenticated, user, logout } = useAuthStore()
@@ -45,23 +41,19 @@ export default function DashboardLayout({
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="flex items-center px-6 py-5 border-b border-gray-200">
-            <h1 className="text-xl font-bold text-primary-600">
-              💰 Salary Advance
-            </h1>
+            <h1 className="text-xl font-bold text-primary-600">💰 Salary Advance</h1>
           </div>
 
           {/* Navigation */}
           <nav className="flex-1 px-4 py-6 space-y-1">
-            {navigation.map((item) => {
+            {navigation.map(item => {
               const isActive = pathname === item.href
               return (
                 <Link
                   key={item.name}
                   href={item.href}
                   className={`flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
-                    isActive
-                      ? 'bg-primary-50 text-primary-700'
-                      : 'text-gray-700 hover:bg-gray-50'
+                    isActive ? 'bg-primary-50 text-primary-700' : 'text-gray-700 hover:bg-gray-50'
                   }`}
                 >
                   <span className="mr-3 text-lg">{item.icon}</span>
@@ -80,16 +72,11 @@ export default function DashboardLayout({
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 truncate">
-                  {user?.email}
-                </p>
+                <p className="text-sm font-medium text-gray-900 truncate">{user?.email}</p>
                 <p className="text-xs text-gray-500">Employer</p>
               </div>
             </div>
-            <button
-              onClick={handleLogout}
-              className="w-full btn btn-secondary text-sm"
-            >
+            <button onClick={handleLogout} className="w-full btn btn-secondary text-sm">
               Logout
             </button>
           </div>
@@ -98,9 +85,7 @@ export default function DashboardLayout({
 
       {/* Main content */}
       <div className="ml-64">
-        <main className="py-8 px-8">
-          {children}
-        </main>
+        <main className="py-8 px-8">{children}</main>
       </div>
     </div>
   )

@@ -12,7 +12,11 @@ import {
 import * as SecureStore from 'expo-secure-store'
 import { authApi } from '../services/api'
 import { useAuthStore } from '../store/authStore'
-import { checkBiometricCapabilities, authenticateWithBiometrics, getBiometricTypeName } from '../utils/biometrics'
+import {
+  checkBiometricCapabilities,
+  authenticateWithBiometrics,
+  getBiometricTypeName,
+} from '../utils/biometrics'
 
 export default function LoginScreen() {
   const [phoneNumber, setPhoneNumber] = useState('')
@@ -153,9 +157,7 @@ export default function LoginScreen() {
             onPress={handleLogin}
             disabled={isLoading}
           >
-            <Text style={styles.buttonText}>
-              {isLoading ? 'Logging in...' : 'Login'}
-            </Text>
+            <Text style={styles.buttonText}>{isLoading ? 'Logging in...' : 'Login'}</Text>
           </TouchableOpacity>
 
           {biometricsAvailable && (
@@ -183,9 +185,7 @@ export default function LoginScreen() {
           </TouchableOpacity>
         </View>
 
-        <Text style={styles.footer}>
-          Don't have an account? Contact your employer
-        </Text>
+        <Text style={styles.footer}>Don't have an account? Contact your employer</Text>
       </View>
     </KeyboardAvoidingView>
   )

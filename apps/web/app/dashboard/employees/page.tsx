@@ -68,10 +68,7 @@ export default function EmployeesPage() {
             Manage your team members and their salary advance access
           </p>
         </div>
-        <button
-          onClick={() => setIsAddingEmployee(true)}
-          className="btn btn-primary"
-        >
+        <button onClick={() => setIsAddingEmployee(true)} className="btn btn-primary">
           + Add Employee
         </button>
       </div>
@@ -80,9 +77,7 @@ export default function EmployeesPage() {
       {isAddingEmployee && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
-              Add New Employee
-            </h2>
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Add New Employee</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -217,16 +212,15 @@ export default function EmployeesPage() {
                     <div className="flex items-center">
                       <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center mr-3">
                         <span className="text-primary-700 font-semibold">
-                          {employee.firstName[0]}{employee.lastName[0]}
+                          {employee.firstName[0]}
+                          {employee.lastName[0]}
                         </span>
                       </div>
                       <div>
                         <div className="text-sm font-medium text-gray-900">
                           {employee.firstName} {employee.lastName}
                         </div>
-                        <div className="text-sm text-gray-500">
-                          {employee.mpesaNumber}
-                        </div>
+                        <div className="text-sm text-gray-500">{employee.mpesaNumber}</div>
                       </div>
                     </div>
                   </td>
@@ -256,10 +250,7 @@ export default function EmployeesPage() {
           <p className="text-gray-600 mb-6">
             Add your first employee to get started with salary advances
           </p>
-          <button
-            onClick={() => setIsAddingEmployee(true)}
-            className="btn btn-primary"
-          >
+          <button onClick={() => setIsAddingEmployee(true)} className="btn btn-primary">
             + Add Employee
           </button>
         </div>

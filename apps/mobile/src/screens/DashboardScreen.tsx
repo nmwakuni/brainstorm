@@ -18,13 +18,7 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList>
 export default function DashboardScreen() {
   const navigation = useNavigation<NavigationProp>()
 
-  const {
-    data,
-    isLoading,
-    error,
-    refetch,
-    isRefetching,
-  } = useQuery({
+  const { data, isLoading, error, refetch, isRefetching } = useQuery({
     queryKey: ['dashboard'],
     queryFn: employeeApi.getDashboard,
   })
@@ -73,15 +67,15 @@ export default function DashboardScreen() {
   return (
     <ScrollView
       style={styles.container}
-      refreshControl={
-        <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-      }
+      refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refetch} />}
     >
       {/* Header */}
       <View style={styles.header}>
         <View>
           <Text style={styles.greeting}>Hello,</Text>
-          <Text style={styles.name}>{employee.firstName} {employee.lastName}</Text>
+          <Text style={styles.name}>
+            {employee.firstName} {employee.lastName}
+          </Text>
         </View>
         <TouchableOpacity
           onPress={() => navigation.navigate('Profile')}
@@ -103,9 +97,7 @@ export default function DashboardScreen() {
         <View style={styles.earningsGrid}>
           <View style={styles.earningsItem}>
             <Text style={styles.earningsLabel}>Monthly Salary</Text>
-            <Text style={styles.earningsValue}>
-              {formatCurrency(earnings.monthlySalary)}
-            </Text>
+            <Text style={styles.earningsValue}>{formatCurrency(earnings.monthlySalary)}</Text>
           </View>
 
           <View style={styles.earningsItem}>
@@ -120,12 +112,8 @@ export default function DashboardScreen() {
 
         <View style={styles.availableSection}>
           <Text style={styles.availableLabel}>Available to Withdraw</Text>
-          <Text style={styles.availableValue}>
-            {formatCurrency(earnings.availableToWithdraw)}
-          </Text>
-          <Text style={styles.availableHint}>
-            (50% of earned wages - already advanced)
-          </Text>
+          <Text style={styles.availableValue}>{formatCurrency(earnings.availableToWithdraw)}</Text>
+          <Text style={styles.availableHint}>(50% of earned wages - already advanced)</Text>
         </View>
 
         {earnings.totalAdvancedThisMonth > 0 && (
@@ -150,9 +138,7 @@ export default function DashboardScreen() {
       </TouchableOpacity>
 
       {earnings.availableToWithdraw <= 0 && (
-        <Text style={styles.disabledHint}>
-          You've reached your advance limit for this month
-        </Text>
+        <Text style={styles.disabledHint}>You've reached your advance limit for this month</Text>
       )}
 
       {/* Recent Advances */}
@@ -167,9 +153,7 @@ export default function DashboardScreen() {
         {recentAdvances.length === 0 ? (
           <View style={styles.emptyState}>
             <Text style={styles.emptyText}>No advances yet</Text>
-            <Text style={styles.emptySubtext}>
-              Request your first advance to get started
-            </Text>
+            <Text style={styles.emptySubtext}>Request your first advance to get started</Text>
           </View>
         ) : (
           recentAdvances.slice(0, 3).map((advance: any) => (
@@ -178,9 +162,7 @@ export default function DashboardScreen() {
                 <Text style={styles.advanceAmount}>
                   {formatCurrency(parseFloat(advance.amount))}
                 </Text>
-                <Text style={styles.advanceDate}>
-                  {formatDate(advance.requestedAt)}
-                </Text>
+                <Text style={styles.advanceDate}>{formatDate(advance.requestedAt)}</Text>
               </View>
               <View style={styles.advanceRight}>
                 <View style={[styles.statusBadge, getStatusStyle(advance.status)]}>

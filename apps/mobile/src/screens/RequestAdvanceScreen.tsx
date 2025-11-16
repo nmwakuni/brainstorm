@@ -26,7 +26,7 @@ export default function RequestAdvanceScreen() {
 
   const requestMutation = useMutation({
     mutationFn: (amount: number) => advanceApi.request(amount),
-    onSuccess: async (response) => {
+    onSuccess: async response => {
       queryClient.invalidateQueries({ queryKey: ['dashboard'] })
       queryClient.invalidateQueries({ queryKey: ['advances'] })
 
@@ -43,16 +43,12 @@ export default function RequestAdvanceScreen() {
         }, 3000)
       }
 
-      Alert.alert(
-        'Success! 🎉',
-        response.message || 'Your advance has been approved!',
-        [
-          {
-            text: 'OK',
-            onPress: () => navigation.goBack(),
-          },
-        ]
-      )
+      Alert.alert('Success! 🎉', response.message || 'Your advance has been approved!', [
+        {
+          text: 'OK',
+          onPress: () => navigation.goBack(),
+        },
+      ])
     },
     onError: (error: any) => {
       Alert.alert(
@@ -158,9 +154,7 @@ export default function RequestAdvanceScreen() {
                 onPress={() => setAmount(suggestedAmount.toString())}
                 disabled={requestMutation.isPending}
               >
-                <Text style={styles.suggestedText}>
-                  {formatCurrency(suggestedAmount)}
-                </Text>
+                <Text style={styles.suggestedText}>{formatCurrency(suggestedAmount)}</Text>
               </TouchableOpacity>
             ))}
         </View>
@@ -183,9 +177,7 @@ export default function RequestAdvanceScreen() {
 
             <View style={styles.breakdownRow}>
               <Text style={styles.breakdownLabelBold}>You will receive</Text>
-              <Text style={styles.breakdownValueBold}>
-                {formatCurrency(parsedAmount)}
-              </Text>
+              <Text style={styles.breakdownValueBold}>{formatCurrency(parsedAmount)}</Text>
             </View>
 
             <View style={styles.breakdownRow}>
@@ -213,8 +205,8 @@ export default function RequestAdvanceScreen() {
         <View style={styles.infoBox}>
           <Text style={styles.infoIcon}>ℹ️</Text>
           <Text style={styles.infoText}>
-            Money will be sent to your M-Pesa within minutes. The total amount
-            (advance + fee) will be deducted from your next salary.
+            Money will be sent to your M-Pesa within minutes. The total amount (advance + fee) will
+            be deducted from your next salary.
           </Text>
         </View>
       </View>

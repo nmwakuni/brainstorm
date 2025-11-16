@@ -45,11 +45,7 @@ export default function Navigation() {
         }}
       >
         {!isAuthenticated ? (
-          <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{ headerShown: false }}
-          />
+          <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         ) : (
           <>
             <Stack.Screen
@@ -67,11 +63,7 @@ export default function Navigation() {
               component={AdvanceHistoryScreen}
               options={{ title: 'History' }}
             />
-            <Stack.Screen
-              name="Profile"
-              component={ProfileScreen}
-              options={{ title: 'Profile' }}
-            />
+            <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile' }} />
           </>
         )}
       </Stack.Navigator>

@@ -88,9 +88,7 @@ export default function AdvanceHistoryScreen() {
         <View style={styles.emptyState}>
           <Text style={styles.emptyIcon}>💸</Text>
           <Text style={styles.emptyTitle}>No advances yet</Text>
-          <Text style={styles.emptyText}>
-            Request your first salary advance to see it here
-          </Text>
+          <Text style={styles.emptyText}>Request your first salary advance to see it here</Text>
         </View>
       ) : (
         <View style={styles.list}>
@@ -98,9 +96,7 @@ export default function AdvanceHistoryScreen() {
             <View key={advance.id} style={styles.card}>
               <View style={styles.cardHeader}>
                 <View>
-                  <Text style={styles.amount}>
-                    {formatCurrency(advance.amount)}
-                  </Text>
+                  <Text style={styles.amount}>{formatCurrency(advance.amount)}</Text>
                   <Text style={styles.date}>{formatDate(advance.requestedAt)}</Text>
                 </View>
                 <View
@@ -109,12 +105,7 @@ export default function AdvanceHistoryScreen() {
                     { backgroundColor: getStatusColor(advance.status) + '20' },
                   ]}
                 >
-                  <Text
-                    style={[
-                      styles.statusText,
-                      { color: getStatusColor(advance.status) },
-                    ]}
-                  >
+                  <Text style={[styles.statusText, { color: getStatusColor(advance.status) }]}>
                     {getStatusIcon(advance.status)} {advance.status}
                   </Text>
                 </View>
@@ -125,24 +116,18 @@ export default function AdvanceHistoryScreen() {
               <View style={styles.details}>
                 <View style={styles.detailRow}>
                   <Text style={styles.detailLabel}>Fee</Text>
-                  <Text style={styles.detailValue}>
-                    {formatCurrency(advance.fee)}
-                  </Text>
+                  <Text style={styles.detailValue}>{formatCurrency(advance.fee)}</Text>
                 </View>
 
                 <View style={styles.detailRow}>
                   <Text style={styles.detailLabel}>Total</Text>
-                  <Text style={styles.detailValue}>
-                    {formatCurrency(advance.totalAmount)}
-                  </Text>
+                  <Text style={styles.detailValue}>{formatCurrency(advance.totalAmount)}</Text>
                 </View>
 
                 {advance.status === 'disbursed' && advance.disbursedAt && (
                   <View style={styles.detailRow}>
                     <Text style={styles.detailLabel}>Disbursed</Text>
-                    <Text style={styles.detailValue}>
-                      {formatDate(advance.disbursedAt)}
-                    </Text>
+                    <Text style={styles.detailValue}>{formatDate(advance.disbursedAt)}</Text>
                   </View>
                 )}
 

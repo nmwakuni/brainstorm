@@ -52,9 +52,9 @@ export class MpesaService {
     }
 
     try {
-      const auth = Buffer.from(
-        `${this.config.consumerKey}:${this.config.consumerSecret}`
-      ).toString('base64')
+      const auth = Buffer.from(`${this.config.consumerKey}:${this.config.consumerSecret}`).toString(
+        'base64'
+      )
 
       const response = await axios.get<MpesaAuthResponse>(
         `${this.baseUrl}/oauth/v1/generate?grant_type=client_credentials`,
@@ -69,7 +69,7 @@ export class MpesaService {
       // Set expiry to 50 minutes (token lasts 1 hour)
       this.tokenExpiry = Date.now() + 50 * 60 * 1000
 
-      return this.accessToken
+      return this.accessToken!
     } catch (error: any) {
       console.error('M-Pesa auth error:', error.response?.data || error.message)
       throw new Error('Failed to authenticate with M-Pesa')
@@ -82,9 +82,7 @@ export class MpesaService {
       const token = await this.getAccessToken()
 
       // Format phone number (remove + and ensure it starts with 254)
-      const phoneNumber = request.phoneNumber
-        .replace(/\+/g, '')
-        .replace(/^0/, '254')
+      const phoneNumber = request.phoneNumber.replace(/\+/g, '').replace(/^0/, '254')
 
       const payload = {
         InitiatorName: this.config.initiatorName,
@@ -113,16 +111,12 @@ export class MpesaService {
       return response.data
     } catch (error: any) {
       console.error('M-Pesa B2C error:', error.response?.data || error.message)
-      throw new Error(
-        error.response?.data?.errorMessage || 'Failed to send M-Pesa payment'
-      )
+      throw new Error(error.response?.data?.errorMessage || 'Failed to send M-Pesa payment')
     }
   }
 
   // Query transaction status
-  async queryTransactionStatus(
-    transactionId: string
-  ): Promise<any> {
+  async queryTransactionStatus(transactionId: string): Promise<any> {
     try {
       const token = await this.getAccessToken()
 
@@ -158,10 +152,7 @@ export class MpesaService {
   }
 
   // Generate security credential (for production)
-  static generateSecurityCredential(
-    initiatorPassword: string,
-    certificatePath: string
-  ): string {
+  static generateSecurityCredential(initiatorPassword: string, _certificatePath: string): string {
     // In production, you would encrypt the initiator password with M-Pesa public certificate
     // For sandbox, you can use the test credential provided by Safaricom
     // This is a placeholder - implement actual encryption in production

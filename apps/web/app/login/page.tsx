@@ -8,7 +8,7 @@ import { useAuthStore } from '@/lib/auth-store'
 
 export default function LoginPage() {
   const router = useRouter()
-  const login = useAuthStore((state) => state.login)
+  const login = useAuthStore(state => state.login)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -40,9 +40,7 @@ export default function LoginPage() {
       <div className="max-w-md w-full mx-4">
         <div className="card">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-primary-600 mb-2">
-              💰 Salary Advance
-            </h1>
+            <h1 className="text-3xl font-bold text-primary-600 mb-2">💰 Salary Advance</h1>
             <p className="text-gray-600">Employer Dashboard</p>
           </div>
 
@@ -57,7 +55,7 @@ export default function LoginPage() {
                 className="input"
                 placeholder="you@company.com"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 required
                 disabled={isLoading}
               />
@@ -73,7 +71,7 @@ export default function LoginPage() {
                 className="input"
                 placeholder="Enter your password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
                 required
                 disabled={isLoading}
               />
@@ -85,11 +83,7 @@ export default function LoginPage() {
               </div>
             )}
 
-            <button
-              type="submit"
-              className="btn btn-primary w-full"
-              disabled={isLoading}
-            >
+            <button type="submit" className="btn btn-primary w-full" disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Login'}
             </button>
           </form>
@@ -97,16 +91,17 @@ export default function LoginPage() {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Don't have an account?{' '}
-              <Link href="/register" className="text-primary-600 hover:text-primary-700 font-medium">
+              <Link
+                href="/register"
+                className="text-primary-600 hover:text-primary-700 font-medium"
+              >
                 Register
               </Link>
             </p>
           </div>
         </div>
 
-        <p className="text-center text-sm text-gray-600 mt-6">
-          Built with ❤️ in Kenya 🇰🇪
-        </p>
+        <p className="text-center text-sm text-gray-600 mt-6">Built with ❤️ in Kenya 🇰🇪</p>
       </div>
     </div>
   )

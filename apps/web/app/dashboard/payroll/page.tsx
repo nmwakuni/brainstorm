@@ -55,9 +55,7 @@ export default function PayrollPage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Payroll</h1>
-          <p className="text-gray-600 mt-2">
-            Process monthly payroll and salary deductions
-          </p>
+          <p className="text-gray-600 mt-2">Process monthly payroll and salary deductions</p>
         </div>
         <button
           onClick={handleProcessPayroll}
@@ -75,7 +73,9 @@ export default function PayrollPage() {
           <div>
             <h3 className="font-semibold text-gray-900 mb-2">How it works</h3>
             <ul className="text-sm text-gray-700 space-y-1">
-              <li>• Processing payroll will automatically deduct all outstanding salary advances</li>
+              <li>
+                • Processing payroll will automatically deduct all outstanding salary advances
+              </li>
               <li>• Each employee's advance total (amount + fee) will be calculated</li>
               <li>• Advances will be marked as "repaid" after successful processing</li>
               <li>• Process payroll at the end of each month before disbursing salaries</li>
@@ -95,9 +95,7 @@ export default function PayrollPage() {
         </div>
       ) : data.payrolls && data.payrolls.length > 0 ? (
         <div className="space-y-6">
-          <h2 className="text-xl font-semibold text-gray-900">
-            Payroll History
-          </h2>
+          <h2 className="text-xl font-semibold text-gray-900">Payroll History</h2>
 
           {data.payrolls.map((payroll: any) => (
             <div key={payroll.id} className="card">
@@ -121,9 +119,7 @@ export default function PayrollPage() {
               {/* Employee Deductions */}
               {payroll.deductions && payroll.deductions.length > 0 && (
                 <div className="mt-4">
-                  <h4 className="text-sm font-semibold text-gray-700 mb-3">
-                    Employee Deductions
-                  </h4>
+                  <h4 className="text-sm font-semibold text-gray-700 mb-3">Employee Deductions</h4>
                   <div className="overflow-x-auto">
                     <table className="min-w-full divide-y divide-gray-200">
                       <thead>

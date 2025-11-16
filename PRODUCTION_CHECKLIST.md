@@ -5,6 +5,7 @@ Complete this checklist before launching to production.
 ## 🔐 Security
 
 ### API Security
+
 - [ ] JWT_SECRET changed to strong random value (> 32 characters)
 - [ ] CORS configured for specific domains only
 - [ ] Rate limiting enabled (express-rate-limit or similar)
@@ -17,6 +18,7 @@ Complete this checklist before launching to production.
 - [ ] Regular dependency updates (npm audit)
 
 ### Authentication
+
 - [ ] PIN hashing using bcrypt (min 10 rounds)
 - [ ] JWT expiration configured (e.g., 7 days)
 - [ ] Refresh token mechanism implemented
@@ -24,6 +26,7 @@ Complete this checklist before launching to production.
 - [ ] Session management properly configured
 
 ### Database
+
 - [ ] Connection strings use SSL
 - [ ] Database credentials rotated
 - [ ] Backup strategy implemented
@@ -35,6 +38,7 @@ Complete this checklist before launching to production.
 ## 💾 Infrastructure
 
 ### Database
+
 - [ ] Production database provisioned
 - [ ] Connection pooling configured
 - [ ] Automated backups scheduled (daily minimum)
@@ -44,6 +48,7 @@ Complete this checklist before launching to production.
 - [ ] Database migrations tested
 
 ### API Hosting
+
 - [ ] Production environment provisioned
 - [ ] Auto-scaling configured
 - [ ] Health check endpoint working
@@ -54,6 +59,7 @@ Complete this checklist before launching to production.
 - [ ] CDN configured (if needed)
 
 ### Web Dashboard
+
 - [ ] Production deployment configured
 - [ ] Environment variables set
 - [ ] SSL certificate configured
@@ -67,6 +73,7 @@ Complete this checklist before launching to production.
 ## 💸 M-Pesa Integration
 
 ### Credentials
+
 - [ ] Safaricom developer account created
 - [ ] KYC verification completed
 - [ ] Production Consumer Key obtained
@@ -77,6 +84,7 @@ Complete this checklist before launching to production.
 - [ ] Security credential encrypted with prod certificate
 
 ### Configuration
+
 - [ ] MPESA_ENABLED set to true
 - [ ] MPESA_ENVIRONMENT set to production
 - [ ] All M-Pesa env variables configured
@@ -87,6 +95,7 @@ Complete this checklist before launching to production.
 - [ ] Transaction logging enabled
 
 ### Testing
+
 - [ ] Sandbox integration fully tested
 - [ ] All success scenarios verified
 - [ ] All failure scenarios handled
@@ -101,6 +110,7 @@ Complete this checklist before launching to production.
 ## 📱 Mobile App
 
 ### Configuration
+
 - [ ] API URLs updated to production
 - [ ] App bundle ID configured
 - [ ] App version number set
@@ -111,6 +121,7 @@ Complete this checklist before launching to production.
 - [ ] Crash reporting enabled (Sentry)
 
 ### Testing
+
 - [ ] Tested on iOS devices (various versions)
 - [ ] Tested on Android devices (various versions)
 - [ ] Biometric authentication tested
@@ -120,6 +131,7 @@ Complete this checklist before launching to production.
 - [ ] Error messages are user-friendly
 
 ### App Store Submission
+
 - [ ] App Store Connect account set up (iOS)
 - [ ] Google Play Console account set up (Android)
 - [ ] App icon (1024x1024) created
@@ -135,6 +147,7 @@ Complete this checklist before launching to production.
 ## 🌐 Web Dashboard
 
 ### Configuration
+
 - [ ] Production API URL configured
 - [ ] Environment variables set
 - [ ] Analytics configured
@@ -143,6 +156,7 @@ Complete this checklist before launching to production.
 - [ ] Social sharing meta tags
 
 ### Testing
+
 - [ ] Cross-browser testing (Chrome, Firefox, Safari, Edge)
 - [ ] Mobile responsive testing
 - [ ] Accessibility testing (WCAG AA)
@@ -156,6 +170,7 @@ Complete this checklist before launching to production.
 ## 📊 Monitoring & Logging
 
 ### Application Monitoring
+
 - [ ] Error tracking configured (Sentry)
 - [ ] Performance monitoring enabled
 - [ ] Uptime monitoring configured
@@ -164,6 +179,7 @@ Complete this checklist before launching to production.
 - [ ] Incident response plan documented
 
 ### Logging
+
 - [ ] Structured logging implemented
 - [ ] Log aggregation configured
 - [ ] Log retention policy defined
@@ -172,6 +188,7 @@ Complete this checklist before launching to production.
 - [ ] Access logs enabled
 
 ### Metrics
+
 - [ ] Key metrics defined and tracked:
   - [ ] API response times
   - [ ] Database query times
@@ -186,6 +203,7 @@ Complete this checklist before launching to production.
 ## 🧪 Testing
 
 ### Unit Tests
+
 - [ ] Core business logic tested
 - [ ] API endpoints tested
 - [ ] Database operations tested
@@ -193,12 +211,14 @@ Complete this checklist before launching to production.
 - [ ] Test coverage > 70%
 
 ### Integration Tests
+
 - [ ] End-to-end flows tested
 - [ ] API + Database integration tested
 - [ ] M-Pesa sandbox integration tested
 - [ ] Webhook handling tested
 
 ### Load Testing
+
 - [ ] API load tested (expected peak load)
 - [ ] Database load tested
 - [ ] Identified bottlenecks
@@ -210,6 +230,7 @@ Complete this checklist before launching to production.
 ## 📝 Documentation
 
 ### User Documentation
+
 - [ ] User guide created
 - [ ] FAQ documented
 - [ ] Video tutorials recorded (optional)
@@ -217,6 +238,7 @@ Complete this checklist before launching to production.
 - [ ] Contact support information provided
 
 ### Developer Documentation
+
 - [ ] README.md updated
 - [ ] API documentation generated
 - [ ] Database schema documented
@@ -226,6 +248,7 @@ Complete this checklist before launching to production.
 - [ ] Code comments adequate
 
 ### Legal Documentation
+
 - [ ] Privacy Policy published
 - [ ] Terms of Service published
 - [ ] Data Processing Agreement (if needed)
@@ -237,6 +260,7 @@ Complete this checklist before launching to production.
 ## 🚨 Incident Response
 
 ### Runbooks
+
 - [ ] Database failure runbook
 - [ ] API outage runbook
 - [ ] M-Pesa integration failure runbook
@@ -244,6 +268,7 @@ Complete this checklist before launching to production.
 - [ ] Data recovery procedure
 
 ### Communication
+
 - [ ] Status page configured
 - [ ] User notification channels defined
 - [ ] Internal communication plan
@@ -254,6 +279,7 @@ Complete this checklist before launching to production.
 ## 💰 Business
 
 ### Financial
+
 - [ ] Pricing model finalized
 - [ ] Fee structure configured
 - [ ] M-Pesa account funded
@@ -262,6 +288,7 @@ Complete this checklist before launching to production.
 - [ ] Financial reconciliation process defined
 
 ### Legal
+
 - [ ] Business registered
 - [ ] Necessary licenses obtained
 - [ ] Insurance obtained (if applicable)
@@ -269,6 +296,7 @@ Complete this checklist before launching to production.
 - [ ] Data protection compliance verified
 
 ### Operations
+
 - [ ] Customer support channels defined
 - [ ] Support ticketing system set up
 - [ ] Support team trained
@@ -280,6 +308,7 @@ Complete this checklist before launching to production.
 ## 🎯 Launch
 
 ### Pre-Launch
+
 - [ ] All checklist items completed
 - [ ] Soft launch to beta users completed
 - [ ] Feedback incorporated
@@ -288,6 +317,7 @@ Complete this checklist before launching to production.
 - [ ] Disaster recovery plan tested
 
 ### Launch Day
+
 - [ ] Monitoring dashboards ready
 - [ ] Team on standby
 - [ ] Rollback plan ready
@@ -295,6 +325,7 @@ Complete this checklist before launching to production.
 - [ ] Launch announcement prepared
 
 ### Post-Launch
+
 - [ ] Monitor key metrics closely
 - [ ] Respond to user feedback
 - [ ] Fix critical bugs immediately
@@ -306,6 +337,7 @@ Complete this checklist before launching to production.
 ## 📈 Success Metrics
 
 Define and track:
+
 - [ ] Daily Active Users (DAU)
 - [ ] Monthly Active Users (MAU)
 - [ ] Advance request conversion rate
@@ -323,6 +355,7 @@ Define and track:
 Once all items are checked, you're ready to launch! 🚀
 
 Remember:
+
 - Start with a soft launch to a small group
 - Monitor everything closely
 - Be ready to rollback if needed

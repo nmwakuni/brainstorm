@@ -12,8 +12,7 @@ export default function AdvancesPage() {
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['advances', statusFilter],
-    queryFn: () =>
-      employerApi.getAdvances(statusFilter === 'all' ? undefined : statusFilter),
+    queryFn: () => employerApi.getAdvances(statusFilter === 'all' ? undefined : statusFilter),
   })
 
   const updateStatusMutation = useMutation({
@@ -79,14 +78,12 @@ export default function AdvancesPage() {
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Advance Requests</h1>
-        <p className="text-gray-600 mt-2">
-          Review and manage employee salary advance requests
-        </p>
+        <p className="text-gray-600 mt-2">Review and manage employee salary advance requests</p>
       </div>
 
       {/* Filters */}
       <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
-        {filters.map((filter) => (
+        {filters.map(filter => (
           <button
             key={filter.value}
             onClick={() => setStatusFilter(filter.value)}
@@ -120,7 +117,9 @@ export default function AdvancesPage() {
                     <h3 className="text-lg font-semibold text-gray-900">
                       {advance.employee?.firstName} {advance.employee?.lastName}
                     </h3>
-                    <span className={`px-3 py-1 text-sm font-medium rounded-full ${getStatusColor(advance.status)}`}>
+                    <span
+                      className={`px-3 py-1 text-sm font-medium rounded-full ${getStatusColor(advance.status)}`}
+                    >
                       {advance.status}
                     </span>
                   </div>
@@ -177,8 +176,7 @@ export default function AdvancesPage() {
                   {advance.failureReason && (
                     <div className="mt-2 p-3 bg-red-50 rounded-lg">
                       <p className="text-sm text-red-900">
-                        <span className="font-medium">Failure reason:</span>{' '}
-                        {advance.failureReason}
+                        <span className="font-medium">Failure reason:</span> {advance.failureReason}
                       </p>
                     </div>
                   )}

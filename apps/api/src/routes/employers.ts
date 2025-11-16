@@ -1,7 +1,13 @@
 import { Hono } from 'hono'
 import { zValidator } from '@hono/zod-validator'
 import { z } from 'zod'
-import { db, employees, users, advances } from '@salary-advance/database'
+import {
+  db,
+  employees,
+  users,
+  advances,
+  employers as employersTable,
+} from '@salary-advance/database'
 import { requireAuth, requireRole, AuthContext } from '../middleware/auth'
 import { hashPin, formatPhoneNumber } from '@salary-advance/lib'
 import { eq, and, desc } from 'drizzle-orm'
@@ -22,7 +28,7 @@ employers.get('/dashboard', async c => {
 
   // Get employer
   const employer = await db.query.employers.findFirst({
-    where: eq(db.schema.employers.userId, userId),
+    where: eq(employersTable.userId, userId),
   })
 
   if (!employer) {
@@ -69,7 +75,7 @@ employers.post('/employees', zValidator('json', createEmployeeSchema), async c =
 
   // Get employer
   const employer = await db.query.employers.findFirst({
-    where: eq(db.schema.employers.userId, userId),
+    where: eq(employersTable.userId, userId),
   })
 
   if (!employer) {
@@ -138,7 +144,7 @@ employers.get('/employees', async c => {
 
   // Get employer
   const employer = await db.query.employers.findFirst({
-    where: eq(db.schema.employers.userId, userId),
+    where: eq(employersTable.userId, userId),
   })
 
   if (!employer) {
@@ -175,7 +181,7 @@ employers.get('/advances', async c => {
 
   // Get employer
   const employer = await db.query.employers.findFirst({
-    where: eq(db.schema.employers.userId, userId),
+    where: eq(employersTable.userId, userId),
   })
 
   if (!employer) {
@@ -215,7 +221,7 @@ employers.patch('/advances/:id', zValidator('json', updateAdvanceStatusSchema), 
 
   // Get employer
   const employer = await db.query.employers.findFirst({
-    where: eq(db.schema.employers.userId, userId),
+    where: eq(employersTable.userId, userId),
   })
 
   if (!employer) {
@@ -258,10 +264,11 @@ employers.patch('/advances/:id', zValidator('json', updateAdvanceStatusSchema), 
     if (process.env.MPESA_ENABLED === 'true') {
       try {
         const mpesa = getMpesaService()
+        const employee = advance.employee as any
         const result = await mpesa.sendMoney({
           amount: parseFloat(advance.amount),
-          phoneNumber: advance.employee.mpesaNumber,
-          remarks: `Salary advance for ${advance.employee.firstName} ${advance.employee.lastName}`,
+          phoneNumber: employee.mpesaNumber,
+          remarks: `Salary advance for ${employee.firstName} ${employee.lastName}`,
           occasionReference: advance.id,
         })
 
@@ -290,10 +297,13 @@ employers.patch('/advances/:id', zValidator('json', updateAdvanceStatusSchema), 
           })
           .where(eq(advances.id, advanceId))
 
-        return c.json({
-          error: 'Advance approved but M-Pesa payment failed',
-          details: error.message,
-        }, 500)
+        return c.json(
+          {
+            error: 'Advance approved but M-Pesa payment failed',
+            details: error.message,
+          },
+          500
+        )
       }
     }
 

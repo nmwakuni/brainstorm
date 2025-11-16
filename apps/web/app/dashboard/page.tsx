@@ -71,14 +71,16 @@ export default function DashboardPage() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {stats.map((stat) => (
+        {stats.map(stat => (
           <div key={stat.name} className="card">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 mb-1">{stat.name}</p>
                 <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
               </div>
-              <div className={`w-12 h-12 rounded-lg ${stat.color} flex items-center justify-center text-2xl`}>
+              <div
+                className={`w-12 h-12 rounded-lg ${stat.color} flex items-center justify-center text-2xl`}
+              >
                 {stat.icon}
               </div>
             </div>
@@ -90,9 +92,7 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Advances */}
         <div className="card">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
-            Recent Advances
-          </h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Advances</h2>
           {data.recentAdvances && data.recentAdvances.length > 0 ? (
             <div className="space-y-3">
               {data.recentAdvances.slice(0, 5).map((advance: any) => (
@@ -117,8 +117,8 @@ export default function DashboardPage() {
                         advance.status === 'disbursed'
                           ? 'bg-green-100 text-green-700'
                           : advance.status === 'pending'
-                          ? 'bg-yellow-100 text-yellow-700'
-                          : 'bg-blue-100 text-blue-700'
+                            ? 'bg-yellow-100 text-yellow-700'
+                            : 'bg-blue-100 text-blue-700'
                       }`}
                     >
                       {advance.status}
@@ -128,17 +128,13 @@ export default function DashboardPage() {
               ))}
             </div>
           ) : (
-            <p className="text-gray-500 text-center py-8">
-              No recent advances
-            </p>
+            <p className="text-gray-500 text-center py-8">No recent advances</p>
           )}
         </div>
 
         {/* Quick Actions */}
         <div className="card">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
-            Quick Actions
-          </h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h2>
           <div className="space-y-3">
             <a
               href="/dashboard/employees"
@@ -148,9 +144,7 @@ export default function DashboardPage() {
                 <span className="text-2xl mr-3">👤</span>
                 <div>
                   <p className="font-medium text-gray-900">Add Employee</p>
-                  <p className="text-sm text-gray-600">
-                    Onboard new team members
-                  </p>
+                  <p className="text-sm text-gray-600">Onboard new team members</p>
                 </div>
               </div>
             </a>
@@ -178,9 +172,7 @@ export default function DashboardPage() {
                 <span className="text-2xl mr-3">💰</span>
                 <div>
                   <p className="font-medium text-gray-900">Process Payroll</p>
-                  <p className="text-sm text-gray-600">
-                    Manage salary deductions
-                  </p>
+                  <p className="text-sm text-gray-600">Manage salary deductions</p>
                 </div>
               </div>
             </a>

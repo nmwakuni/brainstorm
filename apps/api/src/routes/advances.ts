@@ -51,10 +51,7 @@ advancesRoute.post('/request', zValidator('json', requestAdvanceSchema), async c
   // Get advances this month
   const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1)
   const advancesThisMonth = await db.query.advances.findMany({
-    where: and(
-      eq(advances.employeeId, employee.id),
-      gte(advances.requestedAt, firstDayOfMonth)
-    ),
+    where: and(eq(advances.employeeId, employee.id), gte(advances.requestedAt, firstDayOfMonth)),
   })
 
   const activeAdvances = advancesThisMonth.filter(
@@ -146,9 +143,12 @@ advancesRoute.post('/request', zValidator('json', requestAdvanceSchema), async c
         })
         .where(eq(advances.id, newAdvance.id))
 
-      return c.json({
-        error: 'Failed to process M-Pesa payment. Please try again later.',
-      }, 500)
+      return c.json(
+        {
+          error: 'Failed to process M-Pesa payment. Please try again later.',
+        },
+        500
+      )
     }
   }
 
@@ -181,7 +181,8 @@ advancesRoute.get('/:id', async c => {
   }
 
   // Verify user has access to this advance
-  if (advance.employee.userId !== userId) {
+  const employee = advance.employee as any
+  if (employee.userId !== userId) {
     return c.json({ error: 'Forbidden' }, 403)
   }
 

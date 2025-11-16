@@ -1,5 +1,5 @@
-import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
+import * as bcrypt from 'bcrypt'
+import * as jwt from 'jsonwebtoken'
 
 const SALT_ROUNDS = 10
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production'

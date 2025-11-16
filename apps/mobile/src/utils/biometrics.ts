@@ -27,7 +27,9 @@ export async function checkBiometricCapabilities(): Promise<BiometricCapabilitie
  * Get a human-readable name for the biometric type
  */
 export function getBiometricTypeName(capabilities: BiometricCapabilities): string {
-  if (capabilities.supportedTypes.includes(LocalAuthentication.AuthenticationType.FACIAL_RECOGNITION)) {
+  if (
+    capabilities.supportedTypes.includes(LocalAuthentication.AuthenticationType.FACIAL_RECOGNITION)
+  ) {
     return 'Face ID'
   }
   if (capabilities.supportedTypes.includes(LocalAuthentication.AuthenticationType.FINGERPRINT)) {
